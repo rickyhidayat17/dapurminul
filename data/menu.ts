@@ -46,7 +46,7 @@ export const menus = [
     name: "Pangsit Chili Oil",
     category: "Pangsit",
     price: 13000,
-    image: "/pangsit.jpg",
+    image: "/pangsit.jpeg",
     desc: "Pangsit Chili Oil rebus isi 5 pcs",
   },
   {
@@ -54,7 +54,7 @@ export const menus = [
     name: "Pangsit Mentai",
     category: "Pangsit",
     price: 13000,
-    image: "/pangsit.jpg",
+    image: "/pangsit.jpeg",
     desc: "Pangsit Mentai bakar isi 5 pcs",
   },
   {
@@ -62,7 +62,7 @@ export const menus = [
     name: "Tahu Baso",
     category: "Tahu Baso",
     price: 13000,
-    image: "/tahubaso.jpg",
+    image: "/tahubaso.jpeg",
     desc: "Tahu Baso isi 5 pcs dengan sambal kecap",
   },
   {
@@ -86,7 +86,7 @@ export const menus = [
     name: "Otak-otak Cobek",
     category: "Basreng & Otak-otak",
     price: 11000,
-    image: "/basreng.jpg",
+    image: "/otak-otak.jpeg",
     desc: "Otak-otak dengan bumbu khas ulek tradisional",
   },
   {
@@ -94,7 +94,7 @@ export const menus = [
     name: "Otak-otak Karedok",
     category: "Basreng & Otak-otak",
     price: 11000,
-    image: "/basreng.jpg",
+    image: "/otak-otak.jpeg",
     desc: "Otak-otak dengan bumbu khas ulek kacang",
   },
   {
