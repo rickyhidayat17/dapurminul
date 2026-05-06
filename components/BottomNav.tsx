@@ -4,6 +4,7 @@ import { Home, ShoppingCart, History } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
+import { User } from "lucide-react";
 
 export default function BottomNav() {
   const pathname = usePathname();
@@ -53,6 +54,15 @@ export default function BottomNav() {
       >
         <History size={22} />
         <span>Riwayat</span>
+      </Link>
+      
+        {/* Admin */}
+      <Link
+      href="/admin"
+      className="flex flex-col items-center"
+      >
+      <User size={22} />
+      <span className="text-xs">Admin</span>
       </Link>
     </div>
   );

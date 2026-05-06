@@ -1,26 +1,21 @@
-"use client";
-import { useState } from "react";
-import { categories } from "@/data/menu";
+interface Props {
+  categories: string[];
+  onSelect: (value: string) => void;
+}
 
-export default function CategoryList({ onSelect }: any) {
-  const [active, setActive] = useState("Semua");
-
+export default function CategoryList({
+  categories,
+  onSelect,
+}: Props) {
   return (
     <div className="flex gap-3 overflow-x-auto px-4 py-3">
-      {categories.map((cat) => (
+      {categories.map((item) => (
         <button
-          key={cat}
-          onClick={() => {
-            setActive(cat);
-            onSelect(cat);
-          }}
-          className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${
-            active === cat
-              ? "bg-primary text-white"
-              : "bg-gray-100 text-gray-600"
-          }`}
+          key={item}
+          onClick={() => onSelect(item)}
+          className="whitespace-nowrap rounded-xl border px-4 py-2 text-sm font-medium"
         >
-          {cat}
+          {item}
         </button>
       ))}
     </div>

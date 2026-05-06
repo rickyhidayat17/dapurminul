@@ -15,6 +15,7 @@ export const menus = [
     category: "Dimsum",
     price: 13000,
     image: "/dimsum.jpg",
+    stock: 10,
     desc: "Dimsum Siomay Ayam Mix isi 4 pcs",
   },
   {
@@ -23,6 +24,7 @@ export const menus = [
     category: "Dimsum",
     price: 20000,
     image: "/dimsum.jpg",
+    stock: 10,
     desc: "Dimsum Keju Lumer isi 4 pcs",
   },
   {
@@ -31,6 +33,7 @@ export const menus = [
     category: "Dimsum",
     price: 15000,
     image: "/dimsum.jpg",
+    stock: 10,
     desc: "Lumpia Ayam Kulit Tahu isi 4 pcs",
   },
   {
@@ -39,6 +42,7 @@ export const menus = [
     category: "Dimsum",
     price: 25000,
     image: "/dimsum.jpg",
+    stock: 10,
     desc: "Dimsum Mentai Bakar isi 6 pcs",
   },
   {
@@ -47,6 +51,7 @@ export const menus = [
     category: "Pangsit",
     price: 13000,
     image: "/pangsit.jpeg",
+    stock: 10,
     desc: "Pangsit Chili Oil rebus isi 5 pcs",
   },
   {
@@ -55,6 +60,7 @@ export const menus = [
     category: "Pangsit",
     price: 13000,
     image: "/pangsit.jpeg",
+    stock: 10,
     desc: "Pangsit Mentai bakar isi 5 pcs",
   },
   {
@@ -63,6 +69,7 @@ export const menus = [
     category: "Tahu Baso",
     price: 13000,
     image: "/tahubaso.jpeg",
+    stock: 10,
     desc: "Tahu Baso isi 5 pcs dengan sambal kecap",
   },
   {
@@ -71,14 +78,16 @@ export const menus = [
     category: "Basreng & Otak-otak",
     price: 11000,
     image: "/basreng.jpg",
+    stock: 10,
     desc: "Basreng dengan bumbu khas ulek tradisional",
   },
-   {
+  {
     id: 9,
     name: "Basreng Karedok",
     category: "Basreng & Otak-otak",
     price: 11000,
     image: "/basreng.jpg",
+    stock: 10,
     desc: "Basreng dengan bumbu khas ulek kacang",
   },
   {
@@ -87,6 +96,7 @@ export const menus = [
     category: "Basreng & Otak-otak",
     price: 11000,
     image: "/otak-otak.jpeg",
+    stock: 10,
     desc: "Otak-otak dengan bumbu khas ulek tradisional",
   },
   {
@@ -95,6 +105,7 @@ export const menus = [
     category: "Basreng & Otak-otak",
     price: 11000,
     image: "/otak-otak.jpeg",
+    stock: 10,
     desc: "Otak-otak dengan bumbu khas ulek kacang",
   },
   {
@@ -103,6 +114,7 @@ export const menus = [
     category: "Cemilan Manis",
     price: 6000,
     image: "/basreng.jpg",
+    stock: 10,
     desc: "Jagung - Susu - Keju",
   },
   {
@@ -111,6 +123,7 @@ export const menus = [
     category: "Ekstra",
     price: 3000,
     image: "/basreng.jpg",
+    stock: 10,
     desc: "Tambahan chili oil",
   },
   {
@@ -119,6 +132,7 @@ export const menus = [
     category: "Ekstra",
     price: 2000,
     image: "/basreng.jpg",
+    stock: 10,
     desc: "Tambahan Mayo",
   },
   {
@@ -127,6 +141,7 @@ export const menus = [
     category: "Ekstra",
     price: 3000,
     image: "/basreng.jpg",
+    stock: 10,
     desc: "Tambahan Saos",
   },
 ];
