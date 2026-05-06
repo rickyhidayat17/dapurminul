@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { menus as initialMenus } from "@/data/menu";
 
 interface Product {
@@ -16,6 +17,7 @@ export default function AdminPage() {
   const [isLogin, setIsLogin] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -132,13 +134,23 @@ export default function AdminPage() {
               onChange={(e) => setUsername(e.target.value)}
             />
 
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full rounded-2xl border px-4 py-3 outline-none focus:ring-2 focus:ring-orange-400"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                className="w-full rounded-2xl border px-4 py-3 pr-12 outline-none focus:ring-2 focus:ring-orange-400"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
 
             <button
               onClick={handleLogin}
