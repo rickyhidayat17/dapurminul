@@ -43,9 +43,10 @@ export default function Home() {
         <Header />
 
         <CategoryList
-          categories={categories}
-          onSelect={setSelected}
-        />
+  categories={categories}
+  selected={selected}
+  onSelect={setSelected}
+/>
 
         <div className="px-4 space-y-3">
           {filtered.map((item) => (
