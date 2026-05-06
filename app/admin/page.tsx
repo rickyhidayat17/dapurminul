@@ -58,7 +58,7 @@ export default function AdminPage() {
   };
 
   const handleLogin = () => {
-    if (username === "admin" && password === "admin123") {
+    if (username === "Dapurminul" && password === "@minul2024") {
       setIsLogin(true);
     } else {
       alert("Username atau Password salah");
@@ -110,6 +110,13 @@ export default function AdminPage() {
       <div className="w-full max-w-md space-y-5">
         {!isLogin ? (
           <div className="bg-white rounded-3xl shadow-sm border p-6 space-y-4">
+            <button
+              onClick={() => window.location.href = "/"}
+              className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-white hover:shadow-md"
+            >
+              <span className="text-base">←</span>
+              <span>Kembali ke Beranda</span>
+            </button>
             <div>
               <h1 className="text-2xl font-bold">Login Admin</h1>
               <p className="text-sm text-gray-500 mt-1">
@@ -161,73 +168,88 @@ export default function AdminPage() {
                 {isEditing ? "Edit Produk" : "Tambah Produk"}
               </h2>
 
-              <input
-                type="text"
-                placeholder="Nama Produk"
-                className="w-full rounded-2xl border px-4 py-3"
-                value={form.name}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    name: e.target.value,
-                  })
-                }
-              />
-
-              <input
-                type="text"
-                placeholder="Kategori Produk"
-                className="w-full rounded-2xl border px-4 py-3"
-                value={form.category}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    category: e.target.value,
-                  })
-                }
-              />
-
-              <input
-                type="number"
-                placeholder="Harga"
-                className="w-full rounded-2xl border px-4 py-3"
-                value={form.price}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    price: Number(e.target.value),
-                  })
-                }
-              />
-
-              <input
-                type="number"
-                placeholder="Stock"
-                className="w-full rounded-2xl border px-4 py-3"
-                value={form.stock}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    stock: Number(e.target.value),
-                  })
-                }
-              />
-
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    const imageUrl = URL.createObjectURL(file);
+              <div className="space-y-2">
+                <label className="text-sm font-semibold">Nama Produk</label>
+                <input
+                  type="text"
+                  placeholder="Nama Produk"
+                  className="w-full rounded-2xl border px-4 py-3"
+                  value={form.name}
+                  onChange={(e) =>
                     setForm({
                       ...form,
-                      image: imageUrl,
-                    });
+                      name: e.target.value,
+                    })
                   }
-                }}
-                className="w-full text-sm"
-              />
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold">Kategori Produk</label>
+                <input
+                  type="text"
+                  placeholder="Kategori Produk"
+                  className="w-full rounded-2xl border px-4 py-3"
+                  value={form.category}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      category: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold">Harga Produk</label>
+                <input
+                  type="number"
+                  placeholder="Harga"
+                  className="w-full rounded-2xl border px-4 py-3"
+                  value={form.price}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      price: Number(e.target.value),
+                    })
+                  }
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold">Qty Stock</label>
+                <input
+                  type="number"
+                  placeholder="Stock"
+                  className="w-full rounded-2xl border px-4 py-3"
+                  value={form.stock}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      stock: Number(e.target.value),
+                    })
+                  }
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold">Foto Produk</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const imageUrl = URL.createObjectURL(file);
+                      setForm({
+                        ...form,
+                        image: imageUrl,
+                      });
+                    }
+                  }}
+                  className="w-full text-sm"
+                />
+              </div>
 
               {form.image && (
                 <img
