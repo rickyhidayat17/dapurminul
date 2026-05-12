@@ -294,7 +294,7 @@ export default function AdminPage() {
           stock: Math.max(0, form.stock - 1),
         })
       }
-      className="px-4 py-3 text-lg font-bold"
+      className="px-4 py-1 text-lg font-bold"
     >
       −
     </button>
@@ -323,7 +323,7 @@ export default function AdminPage() {
           stock: form.stock + 1,
         })
       }
-      className="px-4 py-3 text-lg font-bold"
+      className="px-4 py-1 text-lg font-bold"
     >
       +
     </button>
