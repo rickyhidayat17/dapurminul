@@ -284,22 +284,50 @@ export default function AdminPage() {
     Stock
   </label>
 
-  <input
-    type="text"
-    inputMode="numeric"
-    placeholder="0"
-    value={form.stock === 0 ? "" : form.stock}
-    onChange={(e) => {
-      // hanya angka
-      const value = e.target.value.replace(/\D/g, "");
+  <div className="flex items-center overflow-hidden rounded-2xl border border-gray-200">
+    {/* Tombol Minus */}
+    <button
+      type="button"
+      onClick={() =>
+        setForm({
+          ...form,
+          stock: Math.max(0, form.stock - 1),
+        })
+      }
+      className="px-4 py-3 text-lg font-bold"
+    >
+      −
+    </button>
 
-      setForm({
-        ...form,
-        stock: value === "" ? 0 : Number(value),
-      });
-    }}
-    className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
-  />
+    {/* Input */}
+    <input
+      type="number"
+      inputMode="numeric"
+      placeholder="0"
+      value={form.stock}
+      onChange={(e) =>
+        setForm({
+          ...form,
+          stock: e.target.value === "" ? 0 : Number(e.target.value),
+        })
+      }
+      className="w-full border-x border-gray-200 px-4 py-3 text-center text-sm outline-none"
+    />
+
+    {/* Tombol Plus */}
+    <button
+      type="button"
+      onClick={() =>
+        setForm({
+          ...form,
+          stock: form.stock + 1,
+        })
+      }
+      className="px-4 py-3 text-lg font-bold"
+    >
+      +
+    </button>
+  </div>
 
   <p className="mt-1 text-xs text-gray-500">
     Isi 0 jika stok habis
