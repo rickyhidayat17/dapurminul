@@ -26,7 +26,7 @@ export default function AdminPage() {
     name: "",
     price: 0,
     image: "",
-    category: "Dimsum",
+    category: "",
     stock: 0,
   };
 
