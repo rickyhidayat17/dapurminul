@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, LogOut, Pencil, Trash2, Plus } from "lucide-react";
 import { menus as initialMenus } from "@/data/menu";
 
 interface Product {
@@ -100,7 +100,10 @@ export default function AdminPage() {
   const handleEdit = (item: Product) => {
     setForm(item);
     setIsEditing(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleDelete = (id: string) => {
@@ -108,212 +111,263 @@ export default function AdminPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 flex justify-center px-4 py-6">
-      <div className="w-full max-w-md space-y-5">
+    <main className="min-h-screen bg-gray-50 px-4 py-6">
+      <div className="mx-auto w-full max-w-md space-y-5">
         {!isLogin ? (
-          <div className="bg-white rounded-3xl shadow-sm border p-6 space-y-4">
+          <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
             <button
-              onClick={() => window.location.href = "/"}
-              className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-white hover:shadow-md"
+              onClick={() => (window.location.href = "/")}
+              className="mb-5 flex items-center gap-2 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-700 transition hover:bg-white"
             >
-              <span className="text-base">←</span>
+              <span>←</span>
               <span>Kembali ke Beranda</span>
             </button>
-            <div>
-              <h1 className="text-2xl font-bold">Login Admin</h1>
-              <p className="text-sm text-gray-500 mt-1">
-                Masuk untuk mengelola produk dan stok
-              </p>
+
+            <div className="mb-6">
+              <h1 className="text-2xl font-bold text-gray-900">
+                Login Admin
+              </h1>
             </div>
 
-            <input
-              type="text"
-              placeholder="Username"
-              className="w-full rounded-2xl border px-4 py-3 outline-none focus:ring-2 focus:ring-orange-400"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+            <div className="space-y-4">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-gray-700">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  placeholder="Masukkan username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                />
+              </div>
 
-            <div className="relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                className="w-full rounded-2xl border px-4 py-3 pr-12 outline-none focus:ring-2 focus:ring-orange-400"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div>
+                <label className="mb-2 block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Masukkan password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-3 pr-12 text-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+                  >
+                    {showPassword ? (
+                      <EyeOff size={20} />
+                    ) : (
+                      <Eye size={20} />
+                    )}
+                  </button>
+                </div>
+              </div>
 
               <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+                onClick={handleLogin}
+                className="w-full rounded-2xl bg-orange-500 py-3 font-semibold text-white shadow-sm transition hover:bg-orange-600"
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                Login Admin
               </button>
             </div>
-
-            <button
-              onClick={handleLogin}
-              className="w-full rounded-2xl bg-orange-500 text-white font-semibold py-3 shadow-sm"
-            >
-              Login Admin
-            </button>
           </div>
         ) : (
           <>
-            <div className="bg-white rounded-3xl shadow-sm border p-5 flex items-center justify-between">
-              <div>
-                <h1 className="text-xl font-bold">Dashboard Admin</h1>
-                <p className="text-sm text-gray-500">Kelola menu Dapur Minul</p>
-              </div>
+            {/* Header */}
+            <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <h1 className="text-xl font-bold text-gray-900">
+                    Dashboard Admin
+                  </h1>
+                  <p className="text-sm text-gray-500">
+                    Kelola menu & stok produk
+                  </p>
+                </div>
 
-              <button
-                onClick={handleLogout}
-                className="rounded-xl border px-4 py-2 text-sm font-medium"
-              >
-                Logout
-              </button>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 rounded-2xl border border-gray-200 px-4 py-2 text-sm font-medium"
+                >
+                  <LogOut size={16} />
+                  Logout
+                </button>
+              </div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-sm border p-5 space-y-4">
-              <h2 className="text-lg font-bold">
-                {isEditing ? "Edit Produk" : "Tambah Produk"}
-              </h2>
-
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Nama Produk</label>
-                <input
-                  type="text"
-                  placeholder="Nama Produk"
-                  className="w-full rounded-2xl border px-4 py-3"
-                  value={form.name}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      name: e.target.value,
-                    })
-                  }
-                />
+            {/* Form */}
+            <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+              <div className="mb-5 flex items-center gap-2">
+                <Plus size={18} />
+                <h2 className="text-lg font-bold text-gray-900">
+                  {isEditing ? "Edit Produk" : "Tambah Produk"}
+                </h2>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Kategori Produk</label>
-                <input
-                  type="text"
-                  placeholder="Kategori Produk"
-                  className="w-full rounded-2xl border px-4 py-3"
-                  value={form.category}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      category: e.target.value,
-                    })
-                  }
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Harga Produk</label>
-                <input
-                  type="number"
-                  placeholder="Harga"
-                  className="w-full rounded-2xl border px-4 py-3"
-                  value={form.price}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      price: Number(e.target.value),
-                    })
-                  }
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Qty Stock</label>
-                <input
-                  type="number"
-                  placeholder="Stock"
-                  className="w-full rounded-2xl border px-4 py-3"
-                  value={form.stock}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      stock: Number(e.target.value),
-                    })
-                  }
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Foto Produk</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      const imageUrl = URL.createObjectURL(file);
+              <div className="space-y-4">
+                <div>
+                  <label className="mb-2 block text-sm font-medium">
+                    Nama Produk
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: Dimsum Ayam"
+                    value={form.name}
+                    onChange={(e) =>
                       setForm({
                         ...form,
-                        image: imageUrl,
-                      });
+                        name: e.target.value,
+                      })
                     }
-                  }}
-                  className="w-full text-sm"
-                />
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-medium">
+                    Kategori Produk
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: Dimsum"
+                    value={form.category}
+                    onChange={(e) =>
+                      setForm({
+                        ...form,
+                        category: e.target.value,
+                      })
+                    }
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="mb-2 block text-sm font-medium">
+                      Harga
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="25000"
+                      value={form.price}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          price: Number(e.target.value),
+                        })
+                      }
+                      className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-2 block text-sm font-medium">
+                      Stock
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="10"
+                      value={form.stock}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          stock: Number(e.target.value),
+                        })
+                      }
+                      className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-medium">
+                    Foto Produk
+                  </label>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const imageUrl = URL.createObjectURL(file);
+                        setForm({
+                          ...form,
+                          image: imageUrl,
+                        });
+                      }
+                    }}
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm"
+                  />
+                </div>
+
+                {form.image && (
+                  <img
+                    src={form.image}
+                    alt="Preview"
+                    className="h-44 w-full rounded-2xl border object-cover"
+                  />
+                )}
+
+                <button
+                  onClick={handleSubmit}
+                  className="w-full rounded-2xl bg-black py-3 font-semibold text-white transition hover:opacity-90"
+                >
+                  {isEditing ? "Update Produk" : "Tambah Produk"}
+                </button>
               </div>
-
-              {form.image && (
-                <img
-                  src={form.image}
-                  alt="Preview"
-                  className="w-full h-44 rounded-2xl object-cover border"
-                />
-              )}
-
-              <button
-                onClick={handleSubmit}
-                className="w-full rounded-2xl bg-black text-white font-semibold py-3"
-              >
-                {isEditing ? "Update Produk" : "Tambah Produk"}
-              </button>
             </div>
 
+            {/* Product List */}
             <div className="space-y-4">
               {products.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white rounded-3xl shadow-sm border p-4"
+                  className="rounded-3xl border border-gray-100 bg-white p-4 shadow-sm"
                 >
                   {item.image && (
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-44 object-cover rounded-2xl mb-4"
+                      className="mb-4 h-44 w-full rounded-2xl object-cover"
                     />
                   )}
 
                   <div className="space-y-1">
-                    <h3 className="font-bold text-lg">{item.name}</h3>
-                    <p className="text-sm text-gray-500">Kategori: {item.category}</p>
-                    <p className="font-semibold">Rp {item.price.toLocaleString()}</p>
+                    <h3 className="text-lg font-bold">{item.name}</h3>
+                    <p className="text-sm text-gray-500">
+                      Kategori: {item.category}
+                    </p>
+                    <p className="font-semibold">
+                      Rp {item.price.toLocaleString()}
+                    </p>
                     <p className="text-sm">
                       Stock: {item.stock <= 0 ? "Habis" : item.stock}
                     </p>
                   </div>
 
-                  <div className="flex gap-3 mt-4">
+                  <div className="mt-4 grid grid-cols-2 gap-3">
                     <button
                       onClick={() => handleEdit(item)}
-                      className="flex-1 rounded-2xl border py-2 font-medium"
+                      className="flex items-center justify-center gap-2 rounded-2xl border py-3 font-medium"
                     >
+                      <Pencil size={16} />
                       Edit
                     </button>
 
                     <button
                       onClick={() => handleDelete(item.id)}
-                      className="flex-1 rounded-2xl bg-red-500 text-white py-2 font-medium"
+                      className="flex items-center justify-center gap-2 rounded-2xl bg-red-500 py-3 font-medium text-white"
                     >
+                      <Trash2 size={16} />
                       Hapus
                     </button>
                   </div>
