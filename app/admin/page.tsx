@@ -279,28 +279,32 @@ export default function AdminPage() {
   </div>
 
   {/* Stock */}
-  <div>
-    <label className="mb-2 block text-sm font-medium">
-      Stock
-    </label>
-    <input
-      type="number"
-      inputMode="numeric"
-      placeholder="0"
-      value={form.stock}
-      onChange={(e) =>
-        setForm({
-          ...form,
-          stock: e.target.value === "" ? 0 : Number(e.target.value),
-        })
-      }
-      className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
-    />
+<div>
+  <label className="mb-2 block text-sm font-medium">
+    Stock
+  </label>
 
-    <p className="mt-1 text-xs text-gray-500">
-      Isi 0 jika stok habis
-    </p>
-  </div>
+  <input
+    type="text"
+    inputMode="numeric"
+    placeholder="0"
+    value={form.stock === 0 ? "" : form.stock}
+    onChange={(e) => {
+      // hanya angka
+      const value = e.target.value.replace(/\D/g, "");
+
+      setForm({
+        ...form,
+        stock: value === "" ? 0 : Number(value),
+      });
+    }}
+    className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
+  />
+
+  <p className="mt-1 text-xs text-gray-500">
+    Isi 0 jika stok habis
+  </p>
+</div>
 </div>
 
                 <div>
