@@ -217,6 +217,22 @@ const existingOrders = storedOrders
           <span>Rp {totalPrice.toLocaleString()}</span>
         </div>
 
+<div className="mt-6 bg-white rounded-xl border p-4">
+  <h2 className="font-semibold mb-3">
+    Pembayaran QRIS
+  </h2>
+
+  <img
+    src="/qris.jpeg"
+    alt="QRIS Payment"
+    className="w-full rounded-xl border"
+  />
+
+  <p className="text-sm text-gray-500 mt-2">
+    Silakan scan QRIS di atas untuk melakukan pembayaran
+  </p>
+</div>
+
         <button
           onClick={handleCheckout}
           className="w-full mt-4 bg-orange-500 hover:bg-orange-600 transition-colors text-white py-3 rounded-xl font-semibold"
