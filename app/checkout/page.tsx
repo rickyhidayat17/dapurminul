@@ -68,6 +68,7 @@ Total: Rp ${totalPrice.toLocaleString()}
 Silahkan selesaikan payment :
 Bank Mandiri a/n MEGA RAHMAWANTI
 1300020043801
+Atau scan QRIS yang tersedia di halaman checkout.
 
 Terima kasih
 `;
