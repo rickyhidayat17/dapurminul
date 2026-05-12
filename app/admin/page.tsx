@@ -75,27 +75,35 @@ export default function AdminPage() {
   };
 
   const handleSubmit = () => {
-    if (!form.name || !form.price || !form.category || !form.stock) {
-      alert("Semua field wajib diisi");
-      return;
-    }
+  // stock boleh 0, jadi jangan pakai !form.stock
+  if (!form.name || !form.price || !form.category) {
+    alert("Nama produk, harga, dan kategori wajib diisi");
+    return;
+  }
 
-    if (isEditing) {
-      setProducts((prev) =>
-        prev.map((item) => (item.id === form.id ? form : item))
-      );
-    } else {
-      setProducts((prev) => [
-        ...prev,
-        {
-          ...form,
-          id: Date.now().toString(),
-        },
-      ]);
-    }
-
-    resetForm();
+  const finalForm = {
+    ...form,
+    stock: Number(form.stock), // 0 = stok habis
   };
+
+  if (isEditing) {
+    setProducts((prev) =>
+      prev.map((item) =>
+        item.id === finalForm.id ? finalForm : item
+      )
+    );
+  } else {
+    setProducts((prev) => [
+      ...prev,
+      {
+        ...finalForm,
+        id: Date.now().toString(),
+      },
+    ]);
+  }
+
+  resetForm();
+};
 
   const handleEdit = (item: Product) => {
     setForm(item);
@@ -249,7 +257,7 @@ export default function AdminPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+  <div className="grid grid-cols-2 gap-3">
   {/* Harga */}
   <div>
     <label className="mb-2 block text-sm font-medium">
@@ -260,18 +268,10 @@ export default function AdminPage() {
       inputMode="numeric"
       placeholder="25000"
       value={form.price === 0 ? "" : form.price}
-      onFocus={() => {
-        if (form.price === 0) {
-          setForm({
-            ...form,
-            price: 0,
-          });
-        }
-      }}
       onChange={(e) =>
         setForm({
           ...form,
-          price: Number(e.target.value),
+          price: e.target.value === "" ? 0 : Number(e.target.value),
         })
       }
       className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
@@ -286,24 +286,20 @@ export default function AdminPage() {
     <input
       type="number"
       inputMode="numeric"
-      placeholder="10"
-      value={form.stock === 0 ? "" : form.stock}
-      onFocus={() => {
-        if (form.stock === 0) {
-          setForm({
-            ...form,
-            stock: 0,
-          });
-        }
-      }}
+      placeholder="0"
+      value={form.stock}
       onChange={(e) =>
         setForm({
           ...form,
-          stock: Number(e.target.value),
+          stock: e.target.value === "" ? 0 : Number(e.target.value),
         })
       }
       className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
     />
+
+    <p className="mt-1 text-xs text-gray-500">
+      Isi 0 jika stok habis
+    </p>
   </div>
 </div>
 
