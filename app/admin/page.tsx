@@ -250,42 +250,62 @@ export default function AdminPage() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="mb-2 block text-sm font-medium">
-                      Harga
-                    </label>
-                    <input
-                      type="number"
-                      placeholder="25000"
-                      value={form.price}
-                      onChange={(e) =>
-                        setForm({
-                          ...form,
-                          price: Number(e.target.value),
-                        })
-                      }
-                      className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
-                    />
-                  </div>
+  {/* Harga */}
+  <div>
+    <label className="mb-2 block text-sm font-medium">
+      Harga
+    </label>
+    <input
+      type="number"
+      inputMode="numeric"
+      placeholder="25000"
+      value={form.price === 0 ? "" : form.price}
+      onFocus={() => {
+        if (form.price === 0) {
+          setForm({
+            ...form,
+            price: 0,
+          });
+        }
+      }}
+      onChange={(e) =>
+        setForm({
+          ...form,
+          price: Number(e.target.value),
+        })
+      }
+      className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
+    />
+  </div>
 
-                  <div>
-                    <label className="mb-2 block text-sm font-medium">
-                      Stock
-                    </label>
-                    <input
-                      type="number"
-                      placeholder="10"
-                      value={form.stock}
-                      onChange={(e) =>
-                        setForm({
-                          ...form,
-                          stock: Number(e.target.value),
-                        })
-                      }
-                      className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
-                    />
-                  </div>
-                </div>
+  {/* Stock */}
+  <div>
+    <label className="mb-2 block text-sm font-medium">
+      Stock
+    </label>
+    <input
+      type="number"
+      inputMode="numeric"
+      placeholder="10"
+      value={form.stock === 0 ? "" : form.stock}
+      onFocus={() => {
+        if (form.stock === 0) {
+          setForm({
+            ...form,
+            stock: 0,
+          });
+        }
+      }}
+      onChange={(e) =>
+        setForm({
+          ...form,
+          stock: Number(e.target.value),
+        })
+      }
+      className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-black"
+    />
+  </div>
+</div>
 
                 <div>
                   <label className="mb-2 block text-sm font-medium">
