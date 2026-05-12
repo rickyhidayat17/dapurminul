@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Eye, EyeOff, LogOut, Pencil, Trash2, Plus } from "lucide-react";
 import { menus as initialMenus } from "@/data/menu";
-import { supabase } from "@/lib/lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 interface Product {
   id: string;
