@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Eye, EyeOff, LogOut, Pencil, Trash2, Plus } from "lucide-react";
 import { menus as initialMenus } from "@/data/menu";
+import { supabase } from "@/lib/lib/supabase";
 
 interface Product {
   id: string;
@@ -32,27 +33,25 @@ export default function AdminPage() {
 
   const [form, setForm] = useState<Product>(defaultForm);
 
-  useEffect(() => {
-    const savedProducts = localStorage.getItem("products");
+  const fetchProducts = async () => {
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-    if (savedProducts) {
-      setProducts(JSON.parse(savedProducts));
-    } else {
-      setProducts(
-        initialMenus.map((item: any) => ({
-          ...item,
-          image: item.image || "",
-          stock: item.stock ?? 10,
-        }))
-      );
-    }
-  }, []);
+  if (error) {
+    console.log(error);
+    return;
+  }
 
-  useEffect(() => {
-    if (products.length > 0) {
-      localStorage.setItem("products", JSON.stringify(products));
-    }
-  }, [products]);
+  if (data) {
+    setProducts(data);
+  }
+};
+
+useEffect(() => {
+  fetchProducts();
+}, []);
 
   const resetForm = () => {
     setForm(defaultForm);
@@ -74,49 +73,75 @@ export default function AdminPage() {
     resetForm();
   };
 
-  const handleSubmit = () => {
-  // stock boleh 0, jadi jangan pakai !form.stock
+ const handleSubmit = async () => {
   if (!form.name || !form.price || !form.category) {
     alert("Nama produk, harga, dan kategori wajib diisi");
     return;
   }
 
-  const finalForm = {
-    ...form,
+  const payload = {
+    name: form.name,
+    price: form.price,
+    image: form.image,
+    category: form.category,
     stock: Number(form.stock), // 0 = stok habis
   };
 
+  // UPDATE PRODUCT
   if (isEditing) {
-    setProducts((prev) =>
-      prev.map((item) =>
-        item.id === finalForm.id ? finalForm : item
-      )
-    );
-  } else {
-    setProducts((prev) => [
-      ...prev,
-      {
-        ...finalForm,
-        id: Date.now().toString(),
-      },
-    ]);
+    const { error } = await supabase
+      .from("products")
+      .update(payload)
+      .eq("id", form.id);
+
+    if (error) {
+      console.log(error);
+      alert("Gagal update produk");
+      return;
+    }
   }
 
+  // ADD PRODUCT
+  else {
+    const { error } = await supabase
+      .from("products")
+      .insert([payload]);
+
+    if (error) {
+      console.log(error);
+      alert("Gagal tambah produk");
+      return;
+    }
+  }
+
+  await fetchProducts();
   resetForm();
 };
 
-  const handleEdit = (item: Product) => {
-    setForm(item);
-    setIsEditing(true);
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+const handleEdit = (item: Product) => {
+  setForm(item);
+  setIsEditing(true);
 
-  const handleDelete = (id: string) => {
-    setProducts((prev) => prev.filter((item) => item.id !== id));
-  };
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
+const handleDelete = async (id: string) => {
+  const { error } = await supabase
+    .from("products")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.log(error);
+    alert("Gagal menghapus produk");
+    return;
+  }
+
+  await fetchProducts();
+};
 
   return (
     <main className="min-h-screen bg-gray-50 px-4 py-6">
