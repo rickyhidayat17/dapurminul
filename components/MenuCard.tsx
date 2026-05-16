@@ -90,12 +90,13 @@ export default function MenuCard({ item }: any) {
         )}
 
         <img
-          src={item.image}
-          alt={item.name}
-          className={`w-20 h-20 rounded-lg object-cover ${
-            isOutOfStock ? "opacity-60" : ""
-          }`}
-        />
+        src={item.image || "/no-image.png"}
+        alt={item.name}
+        onError={(e) => {
+        e.currentTarget.src = "/no-image.png";
+       }}
+        className="w-24 h-24 object-cover rounded-xl"
+      />
 
         <div className="flex-1">
           <h3 className="font-semibold">
