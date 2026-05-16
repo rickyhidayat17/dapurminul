@@ -8,6 +8,7 @@ import {
   Pencil,
   Trash2,
   Plus,
+  Minus,
 } from "lucide-react";
 
 import axios from "axios";
@@ -180,16 +181,15 @@ export default function AdminPage() {
     <main className="min-h-screen bg-gray-50 px-4 py-6">
       <div className="mx-auto w-full max-w-md space-y-5">
 
-        {/* ================= LOGIN PAGE ================= */}
-
         {!isLogin ? (
+          /* ================= LOGIN PAGE ================= */
           <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
 
             <button
               onClick={() =>
                 (window.location.href = "/")
               }
-              className="mb-5 flex items-center gap-2 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-700 transition hover:bg-white"
+              className="mb-5 flex items-center gap-2 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-700"
             >
               <span>←</span>
               <span>Kembali ke Beranda</span>
@@ -201,10 +201,9 @@ export default function AdminPage() {
 
             <div className="space-y-4">
 
-              {/* USERNAME */}
-
+              {/* Username */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">
+                <label className="mb-2 block text-sm font-semibold text-gray-700">
                   Username
                 </label>
 
@@ -213,18 +212,15 @@ export default function AdminPage() {
                   placeholder="Masukkan username"
                   value={username}
                   onChange={(e) =>
-                    setUsername(
-                      e.target.value
-                    )
+                    setUsername(e.target.value)
                   }
-                  className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                  className="w-full rounded-2xl border border-gray-200 px-4 py-3"
                 />
               </div>
 
-              {/* PASSWORD */}
-
+              {/* Password */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">
+                <label className="mb-2 block text-sm font-semibold text-gray-700">
                   Password
                 </label>
 
@@ -238,11 +234,9 @@ export default function AdminPage() {
                     placeholder="Masukkan password"
                     value={password}
                     onChange={(e) =>
-                      setPassword(
-                        e.target.value
-                      )
+                      setPassword(e.target.value)
                     }
-                    className="w-full rounded-2xl border border-gray-200 px-4 py-3 pr-12 text-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-3 pr-12"
                   />
 
                   <button
@@ -252,7 +246,7 @@ export default function AdminPage() {
                         !showPassword
                       )
                     }
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+                    className="absolute right-4 top-1/2 -translate-y-1/2"
                   >
                     {showPassword ? (
                       <EyeOff size={20} />
@@ -265,7 +259,7 @@ export default function AdminPage() {
 
               <button
                 onClick={handleLogin}
-                className="w-full rounded-2xl bg-orange-500 py-3 font-semibold text-white shadow-sm transition hover:bg-orange-600"
+                className="w-full rounded-2xl bg-orange-500 py-3 font-semibold text-white"
               >
                 Login Admin
               </button>
@@ -279,10 +273,9 @@ export default function AdminPage() {
               <div className="flex items-center justify-between">
 
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900">
+                  <h1 className="text-xl font-bold">
                     Dashboard Admin
                   </h1>
-
                   <p className="text-sm text-gray-500">
                     Kelola menu & stok produk
                   </p>
@@ -290,7 +283,7 @@ export default function AdminPage() {
 
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-2 rounded-2xl border border-gray-200 px-4 py-2 text-sm font-medium"
+                  className="flex items-center gap-2 rounded-2xl border px-4 py-2 text-sm font-medium"
                 >
                   <LogOut size={16} />
                   Logout
@@ -304,134 +297,228 @@ export default function AdminPage() {
 
               <div className="mb-5 flex items-center gap-2">
                 <Plus size={18} />
-
-                <h2 className="text-lg font-bold text-gray-900">
+                <h2 className="text-lg font-bold">
                   {isEditing
                     ? "Edit Produk"
                     : "Tambah Produk"}
                 </h2>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-5">
 
-                {/* NAMA */}
-
-                <input
-                  type="text"
-                  placeholder="Nama Produk"
-                  value={form.name}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      name: e.target.value,
-                    })
-                  }
-                  className="w-full rounded-2xl border border-gray-200 px-4 py-3"
-                />
-
-                {/* KATEGORI */}
-
-                <input
-                  type="text"
-                  placeholder="Kategori Produk"
-                  value={form.category}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      category:
-                        e.target.value,
-                    })
-                  }
-                  className="w-full rounded-2xl border border-gray-200 px-4 py-3"
-                />
-
-                {/* HARGA */}
-
-                <input
-                  type="number"
-                  placeholder="Harga"
-                  value={
-                    form.price === 0
-                      ? ""
-                      : form.price
-                  }
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      price: Number(
-                        e.target.value
-                      ),
-                    })
-                  }
-                  className="w-full rounded-2xl border border-gray-200 px-4 py-3"
-                />
-
-                {/* STOCK */}
-
-                <input
-                  type="number"
-                  placeholder="Stock"
-                  value={form.stock}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      stock: Number(
-                        e.target.value
-                      ),
-                    })
-                  }
-                  className="w-full rounded-2xl border border-gray-200 px-4 py-3"
-                />
-
-                {/* UPLOAD CLOUDINARY */}
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={async (e) => {
-                    const file =
-                      e.target.files?.[0];
-
-                    if (!file) return;
-
-                    try {
-                      const data =
-                        new FormData();
-
-                      data.append(
-                        "file",
-                        file
-                      );
-
-                      data.append(
-                        "upload_preset",
-                        "dapurminul"
-                      );
-
-                      const res =
-                        await axios.post(
-                          "https://api.cloudinary.com/v1_1/rickyhidayat/image/upload",
-                          data
-                        );
-
+                {/* Nama Produk */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">
+                    Nama Produk
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: Dimsum Ayam"
+                    value={form.name}
+                    onChange={(e) =>
                       setForm({
                         ...form,
-                        image:
-                          res.data
-                            .secure_url,
-                      });
-
-                      alert(
-                        "Upload gambar berhasil"
-                      );
-                    } 
-                    catch (error: any) {
-                    console.log(error.response?.data || error);
-                    alert("Upload gambar gagal");
+                        name: e.target.value,
+                      })
                     }
-                  }}
-                  className="w-full rounded-2xl border border-gray-200 px-4 py-3"
-                />
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-3"
+                  />
+                </div>
+
+                {/* Kategori */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">
+                    Kategori Produk
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: Dimsum"
+                    value={form.category}
+                    onChange={(e) =>
+                      setForm({
+                        ...form,
+                        category:
+                          e.target.value,
+                      })
+                    }
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-3"
+                  />
+                </div>
+
+                {/* Harga */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">
+                    Harga Produk
+                  </label>
+
+                  <div className="flex items-center overflow-hidden rounded-2xl border border-gray-200">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm({
+                          ...form,
+                          price: Math.max(
+                            0,
+                            form.price - 1000
+                          ),
+                        })
+                      }
+                      className="px-4 py-3"
+                    >
+                      <Minus size={18} />
+                    </button>
+
+                    <input
+                      type="number"
+                      value={form.price}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          price:
+                            e.target.value === ""
+                              ? 0
+                              : Number(
+                                  e.target.value
+                                ),
+                        })
+                      }
+                      className="w-full border-x border-gray-200 px-4 py-3 text-center outline-none"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm({
+                          ...form,
+                          price:
+                            form.price + 1000,
+                        })
+                      }
+                      className="px-4 py-3"
+                    >
+                      <Plus size={18} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Stock */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">
+                    Stock Produk
+                  </label>
+
+                  <div className="flex items-center overflow-hidden rounded-2xl border border-gray-200">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm({
+                          ...form,
+                          stock: Math.max(
+                            0,
+                            form.stock - 1
+                          ),
+                        })
+                      }
+                      className="px-4 py-3"
+                    >
+                      <Minus size={18} />
+                    </button>
+
+                    <input
+                      type="number"
+                      value={form.stock}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          stock:
+                            e.target.value === ""
+                              ? 0
+                              : Number(
+                                  e.target.value
+                                ),
+                        })
+                      }
+                      className="w-full border-x border-gray-200 px-4 py-3 text-center outline-none"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm({
+                          ...form,
+                          stock:
+                            form.stock + 1,
+                        })
+                      }
+                      className="px-4 py-3"
+                    >
+                      <Plus size={18} />
+                    </button>
+                  </div>
+
+                  <p className="mt-2 text-xs text-gray-500">
+                    Isi 0 jika stok habis
+                  </p>
+                </div>
+
+                {/* Upload Gambar */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">
+                    Foto Produk
+                  </label>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={async (e) => {
+                      const file =
+                        e.target.files?.[0];
+
+                      if (!file) return;
+
+                      try {
+                        const data =
+                          new FormData();
+
+                        data.append(
+                          "file",
+                          file
+                        );
+
+                        data.append(
+                          "upload_preset",
+                          "dapurminul"
+                        );
+
+                        const res =
+                          await axios.post(
+                            "https://api.cloudinary.com/v1_1/rickyhidayat/image/upload",
+                            data
+                          );
+
+                        setForm({
+                          ...form,
+                          image:
+                            res.data
+                              .secure_url,
+                        });
+
+                        alert(
+                          "Upload gambar berhasil"
+                        );
+                      } catch (error: any) {
+                        console.log(
+                          error.response?.data ||
+                            error
+                        );
+                        alert(
+                          "Upload gambar gagal"
+                        );
+                      }
+                    }}
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-3"
+                  />
+                </div>
 
                 {form.image && (
                   <img
@@ -478,7 +565,9 @@ export default function AdminPage() {
 
                   <p className="font-semibold">
                     Rp{" "}
-                    {item.price.toLocaleString()}
+                    {Number(
+                      item.price
+                    ).toLocaleString("id-ID")}
                   </p>
 
                   <p className="text-sm">
